@@ -70,7 +70,7 @@ class ConvBNLayer(nn.Layer):
             bias_attr=ParamAttr(bn_name + '_offset'),
             moving_mean_name=bn_name + '_mean',
             moving_variance_name=bn_name + '_variance',
-            data_format=data_format)
+            data_layout=data_format)
 
     def forward(self, inputs):
         if self.is_vd_mode:
@@ -218,7 +218,7 @@ class SELayer(nn.Layer):
                  data_format="NCHW"):
         super(SELayer, self).__init__()
 
-        self.pool2d_gap = AdaptiveAvgPool2D(1)
+        self.pool2d_gap = AdaptiveAvgPool2D(1, data_format=data_format)
 
         self._num_channels = num_channels
 
@@ -351,7 +351,7 @@ class SE_ResNet_vd(nn.Layer):
                     self.block_list.append(basic_block)
                     shortcut = True
 
-        self.pool2d_avg = AdaptiveAvgPool2D(1)
+        self.pool2d_avg = AdaptiveAvgPool2D(1, data_format=self.data_format)
 
         self.pool2d_avg_channels = num_channels[-1] * 2
 

@@ -1,6 +1,6 @@
 mode: 'train'
 ARCHITECTURE:
-    name: 'ResNet50_vd'
+    name: 'SE_ResNet50_vd'
 
 pretrained_model: ""
 model_save_dir: "./output/"
